@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CALCULATOR </title>
+    </head>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .html{
+            min-width: 100%;
+            min-height: 100%;
+        }
+        .container{
+            margin: 20px;
+            margin-left: 20%;
+            background-color: darkgrey;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            border-style: outset;
+        }
+        .output{
+            margin-bottom: 10px;
+            display: grid;
+            border-style: inset;
+        }
+        .visor{
+            width: 237px;
+            height: 45px;
+            font-size: 20px;
+            background-color: #70856e;
+            border: none;
+            color:rgb(49, 49, 49);
+            font-family: monospace;
+           
+        }
+        .history{
+            width: 237px;
+            height: 25px;
+            font-size: 14px;
+            background-color: #70856e;
+            border:none;
+            color: rgb(49, 49, 49);
+            font-family: monospace;
+
+        }
+        .numpad{
+            display: grid;
+            list-style-type: none ;
+            grid-template-rows: repeat(4,60px);
+            grid-template-columns: repeat(4,60px);
+
+        }
+        .button:focus {
+            outline: none;
+        }
+        .button0:focus {
+            outline: none;
+        }
+        .buttonLr:focus {
+            outline: none;
+        }
+        .button:hover {
+            border-color: rgb(54, 54, 53);
+        }
+        .button0:hover {
+            border-color: rgb(54, 54, 53);
+        }
+        .buttonLr:hover {
+            border-color: rgb(54, 54, 53);
+        }
+        .button{
+            padding : 10px;
+            font-size: 20px;
+            background-color: rgb(248, 248, 247);
+
+        }
+        .button0{
+            padding : 10px;
+            font-size: 20px;
+            background-color: rgb(248, 248, 247);
+            width: 120px;
+            position: relative;
+            
+        }
+        .buttonLr{
+            padding : 10px;
+            font-size: 20px;
+            background-color: rgb(248, 248, 247);
+            width: 60px;
+            margin-left:60px
+        }
+        .name{
+            font-family: monospace;
+            padding: 5px;
+        }
+        .background{
+            height: 600px;
+            background: linear-gradient(to top, #00AAFF, rgb(255, 38, 0));
+        }
+        
+        
+        
+    </style> <!-- ////////////////////////////// C S S    E N D S    H E R E \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+    <body>
+        <div class = "background">
+            <div class = "container" > 
+                <h3 class = "name"> calculetor </h3>
+                <form name = "output" class = "output" id = "output">
+                    <input class = "history" name = "history">
+                    <input class = "visor" name = "visor" id = "visor">
+                </form>
+
+                <div class = "keyboard" id = "keyboard" >
+
+                    <div class = "numpad" id = "numpad">
+                            <input class = "button" type = "button" value ="C" onclick = "clean()">
+                            <input class = "button" type = "button" value = "DEL" onclick = "del()">
+                            <input class = "button" type = "button" value = "/" onclick = "getValue('/')">
+                            <input class = "button" type = "button" value = "x" onclick = "getValue('*')">
+                            <input class = "button" type = "button" value = "7" onclick = "getValue(7)">
+                            <input class = "button" type = "button" value = "8" onclick = "getValue(8)">
+                            <input class = "button" type = "button" value = "9" onclick = "getValue(9)">
+                            <input class = "button" type = "button" value = "-" onclick = "getValue('-')">
+                            <input class = "button" type = "button" value = "4" onclick = "getValue(4)">
+                            <input class = "button" type = "button" value = "5" onclick = "getValue(5)">
+                            <input class = "button" type = "button" value = "6" onclick = "getValue(6)">
+                            <input class = "button" type = "button" value = "+" onclick = "getValue('+')">
+                            <input class = "button" type = "button" value = "1" onclick = "getValue(1)">
+                            <input class = "button" type = "button" value = "2" onclick = "getValue(2)">
+                            <input class = "button" type = "button" value = "3" onclick = "getValue(3)">
+                            <input class = "button" type = "button" value = "+/-" onclick = "neg()">
+                            <input class = "button0" type = "button" value = "0" onclick = "getValue(0)">
+                            <input class = "buttonLr" type = "button" value = "." onclick = "getValue('.')">
+                            <input class = "buttonLr" type = "button" value = "=" onclick = "equals()">
+                    </div>
+                            
+                   
+                </div>
+            </div>
+        </div>
+        <script> /////////////////////////////  H T M L   E N D S  H E R E \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+            function getValue(num){
+                document.output.visor.value = document.output.visor.value+num
+            }
+            function equals(){
+                let input = document.output.visor.value;
+                    
+                document.output.visor.value = eval(input); 
+                console.log (input + eval(input));       
+                document.output.history.value = input + " = " + eval(input);
+            }
+            function clean(){
+                document.getElementById("output").reset();
+            }
+            function del(){
+                var input = document.output.visor.value;
+                document.output.visor.value = input.substring(0,input.length-1);
+            }
+            function neg(){
+                var input = document.output.visor.value;
+                    if (input >0){
+                        -Math.abs(input);
+                        document.output.visor.value = ("-") + input;
+                    }else if(input < 0){
+                        Math.abs(input);
+                        document.output.visor.value = input.substr(1);
+                    }else {
+                        document.output.visor.value = "cant negate.";
+                    }
+            }
+
+
+        </script>
+    </body>
+</html>
+!
